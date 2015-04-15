@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="win">
+      <UniqueIdentifier>{f8ee069d-d79f-4009-9eac-29adb85a66b3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\async.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\core.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\dl.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\error.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\fs.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\fs-event.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\getaddrinfo.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\getnameinfo.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\handle.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\loop-watcher.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\pipe.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\poll.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\process.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\process-stdio.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\req.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\signal.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\stream.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\tcp.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\thread.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\timer.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\tty.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\udp.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\util.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\winapi.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\win\winsock.c">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\fs-poll.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\inet.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\threadpool.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\uv-common.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\libuv-1.4.2\src\version.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\deps\libuv-1.4.2\src\win\atomicops-inl.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\deps\libuv-1.4.2\src\win\handle-inl.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\deps\libuv-1.4.2\src\win\internal.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\deps\libuv-1.4.2\src\win\req-inl.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\deps\libuv-1.4.2\src\win\stream-inl.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\deps\libuv-1.4.2\src\win\winapi.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\deps\libuv-1.4.2\src\win\winsock.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\deps\libuv-1.4.2\src\heap-inl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\deps\libuv-1.4.2\src\queue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\deps\libuv-1.4.2\src\uv-common.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{33426DBD-1EEF-4C88-AD59-7735DDCBBAFB}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>sncore</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_SCL_SECURE_NO_WARNINGS;LUA_BUILD_AS_DLL;LUA_CORE;SN_BUILD_AS_DLL;SN_CORE;_DEBUG;_WINDOWS;_USRDLL;SNCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\deps\lua;..\..\deps\libuv-1.4.2\include;..\..\include;..\..\src;..\..\deps\vld\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>uv.lib;ws2_32.lib;iphlpapi.lib;psapi.lib;lualib53.lib;vld.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_SCL_SECURE_NO_WARNINGS;LUA_BUILD_AS_DLL;LUA_CORE;SN_BUILD_AS_DLL;SN_CORE;NDEBUG;_WINDOWS;_USRDLL;SNCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\deps\lua;..\..\deps\libuv-1.4.2\include;..\..\include;..\..\src;..\..\deps\vld\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>uv.lib;ws2_32.lib;iphlpapi.lib;psapi.lib;lualib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\skynet.h" />
+    <ClInclude Include="..\..\include\skynet_config.h" />
+    <ClInclude Include="..\..\include\skynet_harbor.h" />
+    <ClInclude Include="..\..\include\skynet_malloc.h" />
+    <ClInclude Include="..\..\include\skynet_socket.h" />
+    <ClInclude Include="..\..\src\sn_socket.h" />
+    <ClInclude Include="..\..\src\sn_common.h" />
+    <ClInclude Include="..\..\src\sn_env.h" />
+    <ClInclude Include="..\..\src\sn_handle.h" />
+    <ClInclude Include="..\..\src\sn_harbor.h" />
+    <ClInclude Include="..\..\src\sn_impl.h" />
+    <ClInclude Include="..\..\src\sn_log.h" />
+    <ClInclude Include="..\..\src\sn_malloc.h" />
+    <ClInclude Include="..\..\src\sn_module.h" />
+    <ClInclude Include="..\..\src\sn_monitor.h" />
+    <ClInclude Include="..\..\src\sn_mq.h" />
+    <ClInclude Include="..\..\src\sn_server.h" />
+    <ClInclude Include="..\..\src\sn_timer.h" />
+    <ClInclude Include="..\..\src\socket_server.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\sn_socket.cpp" />
+    <ClCompile Include="..\..\src\sn_env.cpp" />
+    <ClCompile Include="..\..\src\sn_error.cpp" />
+    <ClCompile Include="..\..\src\sn_handle.cpp" />
+    <ClCompile Include="..\..\src\sn_harbor.cpp" />
+    <ClCompile Include="..\..\src\sn_log.cpp" />
+    <ClCompile Include="..\..\src\sn_main.cpp" />
+    <ClCompile Include="..\..\src\sn_malloc.cpp" />
+    <ClCompile Include="..\..\src\sn_module.cpp" />
+    <ClCompile Include="..\..\src\sn_monitor.cpp" />
+    <ClCompile Include="..\..\src\sn_mq.cpp" />
+    <ClCompile Include="..\..\src\sn_server.cpp" />
+    <ClCompile Include="..\..\src\sn_start.cpp" />
+    <ClCompile Include="..\..\src\sn_timer.cpp" />
+    <ClCompile Include="..\..\src\socket_server.cpp" />
+    <ClCompile Include="sn_strsep.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

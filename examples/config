@@ -1,0 +1,24 @@
+root = "./"
+thread = 8
+cpath = root.."cservice/?.dll"
+bootstrap = "snlua bootstrap"	-- The service for bootstrap
+luaservice = root.."../../../service/?.lua;"..root.."../../../examples/?.lua;"
+lua_path = root.."../../../lualib/?.lua;"..root.."../../../examples/?.lua;"
+lua_cpath = root.."luaclib/?.dll"
+
+-- snlua配置
+lualoader = root.."../../../lualib/loader.lua"
+
+logger = nil
+logpath = "."
+
+-- harbor配置
+harbor = 1
+standalone = "0.0.0.0:2013"
+address = "127.0.0.1:2526"
+master = "127.0.0.1:2013"
+start = "main"	-- main script
+
+-- preload = "./examples/preload.lua"	-- run preload.lua before every lua service run
+snax = root.."examples/?.lua;"..root.."test/?.lua"
+-- daemon = "./skynet.pid"
