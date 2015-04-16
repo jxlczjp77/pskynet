@@ -7,11 +7,12 @@ skynet框架windows移植版
 
 ## 项目依赖
 
+```
 1、boost。 读写锁，自旋锁，无锁队列
 2、libuv。 网络部分用libuv替换
 3、lua5.3官方版。 Debug模式下默认使用lua5.3官方版本，方便内存泄漏检测
 4、vld。 windows下的内存泄漏检测库
-
+```
 所有依赖项除了boost以外，都包含在工程目录里面了。boost路径请在vs2013的全局配置中配置好。
 
 ## 编译
@@ -27,14 +28,16 @@ b2 runtime-link=static link=static toolset=msvc-12.0 variant=release
 ## 测试
 
 1：启动skynet服务
+```
 cd build_win32\Win32\Debug
 pskynet ../../../examples/config
-
+```
 注意：Ctrl + C可以退出服务。由于还不明白skynet的退出机制是怎么处理的，所以加了这部分处理逻辑，仅简单的关闭所有IO句柄，退出定时器和监控线程，等待工作线程处理完剩余消息后退出。
 
 2：启动测试客户端
+```
 lua ../../../examples/client.lua
-
+```
 ## skynet相关链接
 
 * Read Wiki https://github.com/cloudwu/skynet/wiki

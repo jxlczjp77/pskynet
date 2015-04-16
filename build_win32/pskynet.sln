@@ -216,6 +216,37 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "debugchannel", "debugchanne
 		{344C74D9-24EB-41FD-9BF0-4EF160A6D89F} = {344C74D9-24EB-41FD-9BF0-4EF160A6D89F}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C5640432-A8F8-442F-93C2-91C0CEE6E80D}"
+	ProjectSection(SolutionItems) = preProject
+		..\test\config = ..\test\config
+		..\test\pingserver.lua = ..\test\pingserver.lua
+		..\test\testdatacenter.lua = ..\test\testdatacenter.lua
+		..\test\testdeadcall.lua = ..\test\testdeadcall.lua
+		..\test\testdeadloop.lua = ..\test\testdeadloop.lua
+		..\test\testdns.lua = ..\test\testdns.lua
+		..\test\testecho.lua = ..\test\testecho.lua
+		..\test\testharborlink.lua = ..\test\testharborlink.lua
+		..\test\testhttp.lua = ..\test\testhttp.lua
+		..\test\testmongodb.lua = ..\test\testmongodb.lua
+		..\test\testmulticast.lua = ..\test\testmulticast.lua
+		..\test\testmulticast2.lua = ..\test\testmulticast2.lua
+		..\test\testmysql.lua = ..\test\testmysql.lua
+		..\test\testoverload.lua = ..\test\testoverload.lua
+		..\test\testping.lua = ..\test\testping.lua
+		..\test\testqueue.lua = ..\test\testqueue.lua
+		..\test\testredis.lua = ..\test\testredis.lua
+		..\test\testredis2.lua = ..\test\testredis2.lua
+		..\test\testresponse.lua = ..\test\testresponse.lua
+		..\test\testsha.lua = ..\test\testsha.lua
+		..\test\testsm.lua = ..\test\testsm.lua
+		..\test\testsocket.lua = ..\test\testsocket.lua
+		..\test\teststm.lua = ..\test\teststm.lua
+		..\test\testterm.lua = ..\test\testterm.lua
+		..\test\testtimer.lua = ..\test\testtimer.lua
+		..\test\testudp.lua = ..\test\testudp.lua
+		..\test\time.lua = ..\test\time.lua
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -445,5 +476,6 @@ Global
 		{2DD5C230-B85C-426C-AA0F-6EEB3D5FBABF} = {EFE4B71B-1515-4581-87A8-9765953506AA}
 		{78A1038F-0E3C-42B6-B44C-08249F87CD2E} = {2DD5C230-B85C-426C-AA0F-6EEB3D5FBABF}
 		{A05395DF-E846-4970-9D43-BC9BAAC5836B} = {30E3F221-8110-4893-9BEA-D7C967F10D05}
+		{C5640432-A8F8-442F-93C2-91C0CEE6E80D} = {EFE4B71B-1515-4581-87A8-9765953506AA}
 	EndGlobalSection
 EndGlobal
