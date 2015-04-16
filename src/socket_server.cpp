@@ -343,32 +343,27 @@ connect_cb_(uv_connect_t* req, int status) {
 	struct socket_server *ss = (socket_server *)s->s.tcp.data;
 	struct socket_message result;
 
-	if (status != 0) {
+	if (status != 0 || uv_read_start((uv_stream_t *)&s->s, alloc_cb, read_cb) != 0) {
 		force_close(ss, s, &result);
 		ss->cb(SN_SOCKET_ERROR, &result);
 	}
 	else {
 		uv_tcp_keepalive(&s->s.tcp, true, false);
-		if (uv_read_start((uv_stream_t *)&s->s.tcp, alloc_cb, read_cb) != 0) {
-			force_close(ss, s, &result);
-			ss->cb(SN_SOCKET_ERROR, &result);
-		}
-		else {
-			s->type = SOCKET_TYPE_CONNECTED;
-			result.opaque = s->opaque;
-			result.id = s->id;
-			result.ud = 0;
-			result.data = NULL;
-			union sockaddr_all u;
-			socklen_t slen = sizeof(u);
-			if (uv_tcp_getpeername(&s->s.tcp, &u.s, &slen) == 0) {
-				void * sin_addr = (u.s.sa_family == AF_INET) ? (void*)&u.v4.sin_addr : (void *)&u.v6.sin6_addr;
-				if (uv_inet_ntop(u.s.sa_family, sin_addr, ss->buffer, sizeof(ss->buffer))) {
-					result.data = ss->buffer;
-				}
+		s->type = SOCKET_TYPE_CONNECTED;
+		s->s.tcp.data = ss;
+		result.opaque = s->opaque;
+		result.id = s->id;
+		result.ud = 0;
+		result.data = NULL;
+		union sockaddr_all u;
+		socklen_t slen = sizeof(u);
+		if (uv_tcp_getpeername(&s->s.tcp, &u.s, &slen) == 0) {
+			void * sin_addr = (u.s.sa_family == AF_INET) ? (void*)&u.v4.sin_addr : (void *)&u.v6.sin6_addr;
+			if (uv_inet_ntop(u.s.sa_family, sin_addr, ss->buffer, sizeof(ss->buffer))) {
+				result.data = ss->buffer;
 			}
-			ss->cb(SN_SOCKET_OPEN, &result);
 		}
+		ss->cb(SN_SOCKET_OPEN, &result);
 	}
 	FREE(req);
 }
@@ -568,7 +563,7 @@ open_socket(struct socket_server *ss, struct request_open * request, struct sock
 		goto _failed;
 	}
 
-	ns->type = SOCKET_TYPE_CONNECTED;
+	ns->type = SOCKET_TYPE_CONNECTING;
 	uv_connect_t *req = (uv_connect_t *)MALLOC(sizeof(uv_connect_t));
 	req->data = ns;
 	int status = uv_tcp_connect(req, &ns->s.tcp, (struct sockaddr *)&addr, connect_cb_);
@@ -768,8 +763,7 @@ send_socket(struct socket_server *ss, struct request_send * request, struct sock
 	struct send_object so;
 	send_object_init(ss, &so, request->buffer, request->sz);
 	if (s->type == SOCKET_TYPE_INVALID || s->id != id 
-		|| s->type == SOCKET_TYPE_HALFCLOSE
-		|| s->type == SOCKET_TYPE_PACCEPT) {
+		|| s->type == SOCKET_TYPE_HALFCLOSE) {
 		so.free_func(request->buffer);
 		return -1;
 	}
@@ -813,11 +807,7 @@ listen_socket(struct socket_server *ss, struct request_listen * request, struct 
 		uv_close((uv_handle_t *)&s->s.tcp, close_cb);
 		return SOCKET_ERROR;
 	}
-
-	if (uv_listen((uv_stream_t *)&s->s.tcp, request->backlog, connection_cb) != 0) {
-		uv_close((uv_handle_t *)&s->s.tcp, close_cb);
-		return SOCKET_ERROR;
-	}
+	s->s.tcp.data = (void *)request->backlog; // 把backlog存在data里面
 	s->type = SOCKET_TYPE_PLISTEN;
 	return -1;
 _failed:
@@ -884,14 +874,31 @@ start_socket(struct socket_server *ss, struct request_start *request, struct soc
 	if (s->type == SOCKET_TYPE_INVALID || s->id !=id) {
 		return SN_SOCKET_ERROR;
 	}
-	if (s->type == SOCKET_TYPE_PACCEPT || s->type == SOCKET_TYPE_PLISTEN) {
-		s->type = (s->type == SOCKET_TYPE_PACCEPT) ? SOCKET_TYPE_CONNECTED : SOCKET_TYPE_LISTEN;
+	if (s->type == SOCKET_TYPE_PACCEPT) {
+		if (uv_read_start((uv_stream_t *)&s->s, alloc_cb, read_cb) != 0) {
+			force_close(ss, s, result);
+			return SN_SOCKET_ERROR;
+		}
+		s->s.tcp.data = ss;
+		s->type = SOCKET_TYPE_CONNECTED;
 		s->opaque = request->opaque;
 		result->data = "start";
 		return SN_SOCKET_OPEN;
 	} else if (s->type == SOCKET_TYPE_CONNECTED) {
 		s->opaque = request->opaque;
 		result->data = "transfer";
+		return SN_SOCKET_OPEN;
+	}
+	else if (s->type == SOCKET_TYPE_PLISTEN) {
+		int backlog = (int)s->s.tcp.data;
+		if (uv_listen((uv_stream_t *)&s->s, backlog, connection_cb) != 0) {
+			force_close(ss, s, result);
+			return SN_SOCKET_ERROR;
+		}
+		s->s.tcp.data = ss;
+		s->type = SOCKET_TYPE_LISTEN;
+		s->opaque = request->opaque;
+		result->data = "start";
 		return SN_SOCKET_OPEN;
 	}
 	return -1;
@@ -1029,12 +1036,6 @@ report_accept(struct socket_server *ss, struct sn_socket *s, struct socket_messa
 
 	if (uv_accept((uv_stream_t *)&s->s.tcp, (uv_stream_t *)&ns->s.tcp) != 0) {
 		uv_close((uv_handle_t *)&ns->s.tcp, close_cb);
-		return 0;
-	}
-
-	uv_tcp_keepalive(&ns->s.tcp, true, false);
-	if (uv_read_start((uv_stream_t *)&ns->s.tcp, alloc_cb, read_cb) != 0) {
-		uv_close((uv_handle_t *)&s->s, close_cb);;
 		return 0;
 	}
 
