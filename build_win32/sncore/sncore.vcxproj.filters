@@ -71,6 +71,9 @@
     <ClInclude Include="..\..\include\skynet_harbor.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\malloc_hook.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\sn_env.cpp">
@@ -119,6 +122,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\socket_server.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\malloc_hook.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

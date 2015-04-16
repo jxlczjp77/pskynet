@@ -11,5 +11,7 @@ SN_API void *skynet_lalloc(void *ud, void *ptr, size_t osize, size_t nsize);	// 
 
 #define skynet_malloc sn_malloc
 #define skynet_free sn_free
+#define skynet_calloc sn_calloc
+#define skynet_realloc sn_realloc
 
 #endif

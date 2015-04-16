@@ -87,6 +87,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\malloc_hook.h" />
     <ClInclude Include="..\..\include\skynet.h" />
     <ClInclude Include="..\..\include\skynet_config.h" />
     <ClInclude Include="..\..\include\skynet_harbor.h" />
@@ -108,6 +109,7 @@
     <ClInclude Include="..\..\src\socket_server.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\malloc_hook.cpp" />
     <ClCompile Include="..\..\src\sn_socket.cpp" />
     <ClCompile Include="..\..\src\sn_env.cpp" />
     <ClCompile Include="..\..\src\sn_error.cpp" />

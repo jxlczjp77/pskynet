@@ -46,7 +46,7 @@ static void _timer(void *p)
 		skynet_updatetime();
 		CHECK_ABORT;
 		wakeup(m, m->count - 1);
-		boost::this_thread::sleep(boost::posix_time::milliseconds(2));
+		boost::this_thread::sleep(boost::posix_time::milliseconds(10));
 	}
 
 	// TODO :: 这里要退出SOCKET线程
