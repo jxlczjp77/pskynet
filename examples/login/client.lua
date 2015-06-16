@@ -1,4 +1,4 @@
-package.cpath = "luaclib/?.so"
+package.cpath = "luaclib/?.dll"
 
 local socket = require "clientsocket"
 local crypt = require "crypt"
@@ -150,10 +150,11 @@ socket.close(fd)
 
 index = index + 1
 
-print("connect again")
+print("connect again1111")
+socket.usleep(1000 * 500)
+
 local fd = assert(socket.connect("127.0.0.1", 8888))
 last = ""
-
 local handshake = string.format("%s@%s#%s:%d", crypt.base64encode(token.user), crypt.base64encode(token.server),crypt.base64encode(subid) , index)
 local hmac = crypt.hmac64(crypt.hashkey(handshake), secret)
 

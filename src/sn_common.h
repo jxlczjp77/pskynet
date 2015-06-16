@@ -22,15 +22,13 @@ using namespace std;
 #include <boost/thread.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/lock_types.hpp>
-#include <boost/unordered_map.hpp>
 #include <boost/lockfree/queue.hpp>
 #include <boost/smart_ptr/detail/spinlock.hpp>
 #include <boost/thread/tss.hpp>
-#include <boost/thread/condition.hpp>
 
+typedef boost::shared_mutex RWMutex;
 typedef boost::shared_lock<boost::shared_mutex> RLock;
 typedef boost::unique_lock<boost::shared_mutex> WLock;
-
 typedef boost::detail::spinlock SpinLock;
 
 struct SNContext;

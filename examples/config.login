@@ -1,8 +1,12 @@
-thread = 8
+root = "./"
+thread = 1
 logger = nil
 harbor = 0
 start = "main"
 bootstrap = "snlua bootstrap"	-- The service for bootstrap
-luaservice = "./service/?.lua;./examples/login/?.lua"
-lualoader = "lualib/loader.lua"
-cpath = "./cservice/?.so"
+luaservice = root.."../../../service/?.lua;"..root.."../../../examples/login/?.lua"
+lualoader = root.."../../../lualib/loader.lua"
+cpath = root.."cservice/?.dll"
+
+lua_path = root.."../../../lualib/?.lua;"..root.."../../../examples/?.lua;"
+lua_cpath = root.."luaclib/?.dll"

@@ -2,7 +2,6 @@
 #define _SN_HANDLE_H_
 #include "sn_common.h"
 #include "sn_harbor.h"
-#include <boost/unordered_map.hpp>
 
 #define INVALID_HANDLE 0
 
@@ -29,7 +28,7 @@ public:
 private:
 	uint32_t m_harbor;
 	uint32_t m_handle_index;
-	boost::shared_mutex m_mutex;
+	RWMutex m_mutex;
 	std::unordered_map<uint32_t, SNContextPtr> m_slot;
 	std::unordered_map<string, uint32_t> m_nameMap;
 };

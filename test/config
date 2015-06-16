@@ -17,7 +17,7 @@ harbor = 1
 standalone = "0.0.0.0:2013"
 address = "127.0.0.1:2526"
 master = "127.0.0.1:2013"
-start = "testterm"	-- main script
+start = "testdeadcall"	-- main script
 
 -- preload = "./examples/preload.lua"	-- run preload.lua before every lua service run
 snax = root.."examples/?.lua;"..root.."test/?.lua"

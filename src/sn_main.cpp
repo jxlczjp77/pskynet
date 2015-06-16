@@ -38,6 +38,37 @@ static const char *optstring(const char *key, const char * opt)
 	return str;
 }
 
+static string exec_path()
+{
+	char tmp[1024];
+	size_t nCount = 0;
+	if (uv_exepath(tmp, &nCount) != 0) {
+		return string();
+	}
+	tmp[nCount] = '\0';
+	return tmp;
+}
+
+// 默认将当前可执行文件路径下的一些基础路径加上，省得每次都要在config文件设置
+static const char *filter_env(const char *key, const char *val)
+{
+	static string ret;
+	ret.clear();
+
+	do {
+		string exePath = exec_path();
+		if (exePath.empty()) {
+			break;
+		}
+
+		if (strcmp(key, "cpath") == 0) {
+
+		}
+
+		return ret.c_str();
+	} while (false);
+	return val;
+}
 
 static bool _init_env(lua_State *L)
 {
@@ -69,15 +100,15 @@ static bool _init_env(lua_State *L)
 }
 
 static const char * load_config = "\
-	local config_name = ...\
-	local f = assert(io.open(config_name))\
-	local code = assert(f:read \'*a\')\
-	local function getenv(name) return assert(os.getenv(name), name) end\
-	code = string.gsub(code, \'%$([%w_%d]+)\', getenv)\
-	f:close()\
-	local result = {}\
-	assert(load(code,\'=(load)\',\'t\',result))()\
-	return result\
+	local config_name = ...\n\
+	local f = assert(io.open(config_name))\n\
+	local code = assert(f:read \'*a\')\n\
+	local function getenv(name) return assert(os.getenv(name), name) end\n\
+	code = string.gsub(code, \'%$([%w_%d]+)\', getenv)\n\
+	f:close()\n\
+	local result = {}\n\
+	assert(load(code,\'=(load)\',\'t\',result))()\n\
+	return result\n\
 ";
 
 int skynet_main(int argc, char *argv[])

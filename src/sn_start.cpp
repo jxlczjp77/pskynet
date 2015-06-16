@@ -4,6 +4,7 @@
 #include "sn_monitor.h"
 #include "sn_timer.h"
 #include "sn_socket.h"
+#include <sstream>
 
 struct monitor
 {
@@ -46,7 +47,7 @@ static void _timer(void *p)
 		skynet_updatetime();
 		CHECK_ABORT;
 		wakeup(m, m->count - 1);
-		boost::this_thread::sleep(boost::posix_time::milliseconds(10));
+		std::this_thread::sleep_for((std::chrono::milliseconds(10)));
 	}
 
 	// TODO :: 这里要退出SOCKET线程
