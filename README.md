@@ -1,5 +1,5 @@
 # pskynet
-skynet框架windows移植版
+skynet框架C++移植版
 
 最近研究了一下云风的skynet框架，光看代码总觉得不是很明白，想调试一下linux又没有用着顺手的工具，再加上对lua不是太熟，所以花了几天时间用C++在windows下移植了框架部分。
 
